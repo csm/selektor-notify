@@ -1,0 +1,2 @@
+[workspace]
+members = ["add_user", "register_push", "run_notify", "update_sched"]
