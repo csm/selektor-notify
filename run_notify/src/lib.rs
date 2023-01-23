@@ -57,10 +57,10 @@ pub async fn function_handler(event: LambdaEvent<CloudWatchEvent>) -> Result<(),
                         _ => println!("ignoring non-string topic {:#?}", v)
                     }
                 }
-                if let Some(v) = item.get(&String::from("fire_interval")) {
+                if let Some(v) = item.get("fire_interval") {
                     match v {
                         AttributeValue::N(interval) => {
-                            if let Some(id) = item.get(&String::from("id")) {
+                            if let Some(id) = item.get("id") {
                                 match id {
                                     AttributeValue::S(idval) => {
                                         match u128::from_str(interval.as_str()) {

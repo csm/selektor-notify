@@ -1,2 +1,2 @@
 [workspace]
-members = ["add_user", "register_push", "run_notify", "update_sched"]
+members = ["add_user", "purge_expired", "register_push", "run_notify", "update_sched"]

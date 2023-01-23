@@ -27,7 +27,7 @@ Lambda invoked on schedule from CloudWatch events, every 5 minutes.
 
 - Scan dynamodb for schedules that need to be run.
 - Post SNS notifications for each schedule.
-- 
+- Update schedules with next fire date.
 
 ## update_schedule
 
@@ -39,15 +39,28 @@ Alters an existing user's schedule in dynamodb.
 
 ### entitlements
 
-|Name|Type|Comment|
-|----|----|-|
-|id|string|Unique ID of the entitlement.|
-|ends|timestamp|When the subscription ends.|
+| Name | Type   | Comment                       |
+|------|--------|-------------------------------|
+| part | string | Partition ID.                 |
+| id   | string | Unique ID of the entitlement. |
+| ends | number | When the subscription ends.   |
+
+#### Secondary Indexes
+
+* `ends`
 
 ### schedules
 
-|Name|Type|Comments|
-|----|----|--------|
-|id|string|Unique ID.|
-|next_fire|timestamp|When the next fire date is.|
-|entitlement|string|The ID of the associated entitlement.|
+| Name          | Type   | Comments                                                                   |
+|---------------|--------|----------------------------------------------------------------------------|
+| part          | string | Partition ID.                                                              |
+| id            | string | Unique ID.                                                                 |
+| next_fire     | number | When the next fire date is (units are 5 minute intervals since the epoch). |
+| topic         | string | Topic ARN for posting SNS events.                                          |
+| entitlement   | string | The ID of the associated entitlement.                                      |
+| fire_interval | number | The interval between fires.                                                |
+
+#### Secondary Indexes
+
+* `next_fire` —
+* `entitlement` —
