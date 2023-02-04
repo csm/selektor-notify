@@ -80,7 +80,6 @@ async fn delete_schedules(ddb_client: &ddb::Client, item: &HashMap<String, Attri
 }
 
 pub async fn function_handler(_event: LambdaEvent<CloudWatchEvent>) -> Result<(), Error> {
-    // Extract some useful information from the request
     let region_provider = RegionProviderChain::default_provider().or_else("us-east-1");
     let config = aws_config::from_env().region(region_provider).load().await;
     let ddb_config = match env::var(DYNAMODB_ENDPOINT) {

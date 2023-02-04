@@ -3,3 +3,5 @@
 /Cargo.lock
 /local-ddb
 .DS_Store
+**/*.zip
+**/bootstrap
