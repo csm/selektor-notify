@@ -2,6 +2,9 @@
 
 AWS Lambda functions for managing Selektor push notifications.
 
+This was a part of a now-abandoned personal project to make an iPhone
+app for monitoring websites for changes.
+
 ## add_user
 
 API Gateway endpoint.
