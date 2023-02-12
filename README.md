@@ -3,7 +3,32 @@
 AWS Lambda functions for managing Selektor push notifications.
 
 This was a part of a now-abandoned personal project to make an iPhone
-app for monitoring websites for changes.
+app for monitoring websites for changes. Consider this just a learning
+experience for me on how to use Rust as an AWS lambda.
+
+The idea here was to periodically send the [iOS app](https://github.com/csm/selektor)
+background push notifications to inform it to update the URLs it tracks.
+This was because background updates were infrequent or not firing at all,
+but this turned out not to work either. The flow here was intended to be:
+
+* The user subscribes to the app, and the app sends the signed receipt to
+  the cloud.
+* After verifying the receipt, issue a new JWT so the app can authenticate
+  itself.
+* The app then uploads the schedule it needs notifications for.
+
+Then, periodically:
+
+* Scan dynamodb for notifications that need to be sent, send them with SNS,
+  and then update the schedule entry. This would run every 5 minutes.
+* Scan dynamodb for expired subscriptions, and delete the entries in the
+  schedule table. This would run daily.
+
+Basic costs for this (not at scale) was $1 per month, due entirely to the
+KMS key.
+
+Rust is fun to write AWS lambdas in! And they're super fast, which translates
+to being cheap to run.
 
 ## add_user
 
